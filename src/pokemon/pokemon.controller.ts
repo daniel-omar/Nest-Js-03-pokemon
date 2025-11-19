@@ -1,13 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus } from '@nestjs/common';
 import { PookemonService } from './pokemon.service';
 import { CreatePookemonDto } from './dto/create-pokemon.dto';
 import { UpdatePookemonDto } from './dto/update-pokemon.dto';
 
 @Controller('pokemon')
 export class PookemonController {
-  constructor(private readonly pookemonService: PookemonService) {}
+  constructor(private readonly pookemonService: PookemonService) { }
 
   @Post()
+  @HttpCode(HttpStatus.OK)
   create(@Body() createPookemonDto: CreatePookemonDto) {
     return this.pookemonService.create(createPookemonDto);
   }
