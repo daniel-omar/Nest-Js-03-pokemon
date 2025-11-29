@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, ParseUUIDPipe } from '@nestjs/common';
 import { PookemonService } from './pokemon.service';
 import { CreatePookemonDto } from './dto/create-pokemon.dto';
 import { UpdatePookemonDto } from './dto/update-pokemon.dto';
+import { ParseMongoIdPipe } from 'src/common/pipes/parse-mongo-id/parse-mongo-id.pipe';
 
 @Controller('pokemon')
 export class PookemonController {
@@ -18,18 +19,18 @@ export class PookemonController {
     return this.pookemonService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.pookemonService.findOne(+id);
+  @Get(':term')
+  findOne(@Param('term') term: string) {
+    return this.pookemonService.findOne(term);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePookemonDto: UpdatePookemonDto) {
-    return this.pookemonService.update(+id, updatePookemonDto);
+  @Patch(':term')
+  update(@Param('term') term: string, @Body() updatePookemonDto: UpdatePookemonDto) {
+    return this.pookemonService.update(term, updatePookemonDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.pookemonService.remove(+id);
+  remove(@Param('id', ParseMongoIdPipe) id: string) {
+    return this.pookemonService.remove(id);
   }
 }
