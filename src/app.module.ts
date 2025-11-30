@@ -5,6 +5,7 @@ import { PookemonModule } from './pokemon/pokemon.module';
 import { Mongoose } from 'mongoose';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CommonModule } from './common/common.module';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
@@ -17,7 +18,9 @@ import { CommonModule } from './common/common.module';
 
     PookemonModule,
 
-    CommonModule
+    CommonModule,
+
+    SeedModule
   ]
 })
 export class AppModule { }
