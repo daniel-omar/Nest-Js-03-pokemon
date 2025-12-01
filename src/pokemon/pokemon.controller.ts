@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, ParseUUIDPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, ParseUUIDPipe, Query } from '@nestjs/common';
 import { PookemonService } from './pokemon.service';
 import { CreatePookemonDto } from './dto/create-pokemon.dto';
 import { UpdatePookemonDto } from './dto/update-pokemon.dto';
 import { ParseMongoIdPipe } from 'src/common/pipes/parse-mongo-id/parse-mongo-id.pipe';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 @Controller('pokemon')
 export class PookemonController {
@@ -15,8 +16,9 @@ export class PookemonController {
   }
 
   @Get()
-  findAll() {
-    return this.pookemonService.findAll();
+  findAll(@Query() queryParameters: PaginationDto) {
+    console.log({ queryParameters })
+    return this.pookemonService.findAll(queryParameters);
   }
 
   @Get(':term')
