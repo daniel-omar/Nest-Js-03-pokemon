@@ -1,7 +1,9 @@
+import { Injectable } from '@nestjs/common';
 import axios, { AxiosRequestConfig } from 'axios';
 import { HttpRequestI } from "src/common/interfaces/http-request.interface";
 import { HttpAdapter } from "src/integration/domain/http-adapter";
 
+@Injectable()
 export class AxiosHttpAdapter extends HttpAdapter {
     async send<T>(request: HttpRequestI): Promise<T> {
         const { url, method, data, params, headers } = request;
