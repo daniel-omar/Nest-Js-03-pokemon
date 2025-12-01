@@ -17,7 +17,10 @@ npm i -g @nestjs/cli
 ```
 docker-compose up -d
 ```
-
+4. Reconstruir la base de datos con la smeilla
+```
+localhost:3100/api/seed
+```
 ## Stacj usado
 * MongoDB
 * NestJs
